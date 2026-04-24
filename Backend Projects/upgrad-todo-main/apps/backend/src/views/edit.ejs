@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Todo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+</head>
+<body class="bg-gradient-to-br from-[#667eea] to-[#764ba2] min-h-screen flex justify-center items-start pt-[10vh] text-white font-['Inter'] m-0 p-0 box-border antialiased">
+  <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-10 w-full max-w-[500px] shadow-2xl mx-4">
+    <h1 class="text-3xl font-semibold mb-6 text-center tracking-tight">Edit Task</h1>
+    
+    <form class="flex flex-col gap-4" action="/ui/edit/<%= todo.id %>" method="POST">
+      <input type="text" name="content" value="<%= todo.content %>" required autocomplete="off" maxlength="300" autofocus
+        class="bg-black/15 border border-white/20 px-5 py-4 rounded-xl text-white text-base outline-none transition-all duration-200 focus:border-white/50 focus:bg-black/25 w-full">
+      <div class="flex gap-4 mt-4">
+        <a href="/ui" class="flex-1 block bg-white/10 text-white border border-white/20 px-4 py-4 rounded-xl font-semibold text-center no-underline transition-all duration-200 focus:outline-none hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 active:translate-y-0">Cancel</a>
+        <button type="submit" class="flex-1 bg-white text-[#764ba2] border-none px-4 py-4 rounded-xl font-semibold cursor-pointer transition-all duration-200 focus:outline-none hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 active:translate-y-0">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

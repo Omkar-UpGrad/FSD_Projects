@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev:backend": "nodemon -w src -e js,jsx,json --exec \"node src/index.js\"",
+    "dev:styles": "tailwindcss -i ./src/public/assets/styles/input.css -o ./src/public/assets/styles/main.css --watch",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:styles\"",
+    "build:styles": "tailwindcss -i ./src/public/assets/styles/input.css -o ./src/public/assets/styles/main.css --minify",
+    "build": "npm run build:styles",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0",
+    "tailwindcss": "^4.2.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

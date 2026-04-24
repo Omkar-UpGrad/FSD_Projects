@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+</head>
+<body class="bg-gradient-to-br from-[#667eea] to-[#764ba2] min-h-screen flex justify-center items-start pt-[10vh] text-white font-['Inter'] m-0 p-0 box-border antialiased">
+  <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-10 w-full max-w-[500px] shadow-2xl mx-4">
+    <h1 class="text-3xl font-semibold mb-6 text-center tracking-tight">My Tasks</h1>
+    
+    <form class="flex gap-3 mb-8" action="/ui" method="POST">
+      <input type="text" name="content" placeholder="What needs to be done?" required autocomplete="off" maxlength="300"
+        class="flex-1 bg-black/15 border border-white/20 px-5 py-4 rounded-xl text-white text-base outline-none transition-all duration-200 placeholder-white/70 focus:border-white/50 focus:bg-black/25">
+      <button type="submit" class="bg-white text-[#764ba2] border-none px-6 py-4 rounded-xl font-semibold cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 active:translate-y-0">Add</button>
+    </form>
+
+    <ul class="flex flex-col gap-4 list-none m-0 p-0">
+      <% if (todos && todos.length > 0) { %>
+        <% todos.forEach(function(todo) { %>
+          <li class="group flex items-center bg-white/5 p-4 rounded-xl border border-white/10 transition-all duration-300 hover:bg-white/10 hover:translate-x-1 <%= todo.isComplete ? 'opacity-70' : '' %>">
+            <form class="inline m-0 flex-shrink-0" action="/ui/toggle/<%= todo.id %>" method="POST">
+              <button type="submit" class="w-6 h-6 rounded-full border-2 cursor-pointer flex items-center justify-center transition-all duration-200 shrink-0 p-0 shadow-none focus:outline-none <%= todo.isComplete ? 'bg-[#4ade80] border-[#4ade80]' : 'bg-transparent border-white/20' %>">
+                <% if (todo.isComplete) { %>
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                <% } %>
+              </button>
+            </form>
+            
+            <div class="flex-1 ml-4 text-base leading-snug break-words transition-all duration-300 <%= todo.isComplete ? 'line-through text-white/50' : '' %>">
+              <%= todo.content %>
+            </div>
+            
+            <div class="flex gap-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ml-2">
+              <a href="/ui/edit/<%= todo.id %>" class="bg-transparent border-none text-white/70 cursor-pointer p-2 transition-transform duration-200 flex items-center justify-center hover:text-white hover:scale-110" title="Edit">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </a>
+              <form class="inline m-0" action="/ui/delete/<%= todo.id %>" method="POST">
+                <button type="submit" class="bg-transparent border-none text-white/70 cursor-pointer p-2 transition-transform duration-200 flex items-center justify-center focus:outline-none hover:text-[#ff4d4f] hover:scale-110" title="Delete">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </li>
+        <% }); %>
+      <% } else { %>
+        <li class="text-center text-white/70 py-4 list-none m-0">No tasks yet. Add one above!</li>
+      <% } %>
+    </ul>
+  </div>
+</body>
+</html>
